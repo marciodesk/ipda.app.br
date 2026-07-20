@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ipda-financeiro",
+  "main": "finance-worker.js",
+  "compatibility_date": "2026-07-20",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ipda-financeiro-db",
+      "database_id": "456ff294-f7ce-49ba-9104-6f4541e55dfb"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "DOCUMENTS",
+      "bucket_name": "ipda-financeiro-documentos"
+    }
+  ]
+}
