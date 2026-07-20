@@ -55,7 +55,6 @@ var page = String.raw(_a || (_a = __template([`<!doctype html>
     </div>
     <div class="module-view" id="view-churches" hidden>
       <div class="module-title"><h2>Igrejas</h2><p>Cadastre e organize a estrutura das igrejas.</p><div class="registration-deadline">Prazo para cadastro: 18/09/2026.<strong id="church-registration-countdown">Calculando tempo restante...</strong></div></div>
-    <section class="card" data-roles="admin" id="public-church-requests-card"><div class="card-head"><h2>Solicitações do cadastro público</h2><p>Aprove ou rejeite os cadastros enviados pelo link público.</p></div><div class="table-wrap" id="public-church-requests"><div class="empty">Carregando solicitações...</div></div><div class="message" id="public-church-requests-message" role="status"></div></section>
     <section class="card">
       <div class="card-head"><h2>Cadastro de Igrejas e Filiais</h2><p>Cadastre classifica\xE7\xE3o, endere\xE7o e c\xF3digo TOTVS da igreja.</p></div>
       <form id="church-form">
@@ -252,7 +251,6 @@ var page = String.raw(_a || (_a = __template([`<!doctype html>
     </div>
     <div class="module-view" id="view-churches" hidden>
       <div class="module-title"><h2>Igrejas</h2><p>Cadastre e organize a estrutura das igrejas.</p><div class="registration-deadline">Prazo para cadastro: 18/09/2026.<strong id="church-registration-countdown">Calculando tempo restante...</strong></div></div>
-    <section class="card" data-roles="admin" id="public-church-requests-card"><div class="card-head"><h2>Solicitações do cadastro público</h2><p>Aprove ou rejeite os cadastros enviados pelo link público.</p></div><div class="table-wrap" id="public-church-requests"><div class="empty">Carregando solicitações...</div></div><div class="message" id="public-church-requests-message" role="status"></div></section>
     <section class="card">
       <div class="card-head"><h2>Cadastro de Igrejas e Filiais</h2><p>Cadastre classifica\xE7\xE3o, endere\xE7o e c\xF3digo TOTVS da igreja.</p></div>
       <form id="church-form">
@@ -775,7 +773,7 @@ function publicChurchRegistrationOpen() {
 }
 __name(publicChurchRegistrationOpen, "publicChurchRegistrationOpen");
 async function ensurePublicChurchRequestsTable(env) {
-  await env.DB.prepare(\`CREATE TABLE IF NOT EXISTS public_church_requests (
+  await env.DB.prepare(`CREATE TABLE IF NOT EXISTS public_church_requests (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     totvs_code TEXT,
@@ -793,12 +791,12 @@ async function ensurePublicChurchRequestsTable(env) {
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     reviewed_at TEXT,
     reviewed_by TEXT
-  )\`).run();
+  )`).run();
 }
 __name(ensurePublicChurchRequestsTable, "ensurePublicChurchRequestsTable");
 function publicChurchRegistrationPage() {
-  if (!publicChurchRegistrationOpen()) return \`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Cadastro encerrado</title><style>body{font-family:Arial;background:#f0f7f2;color:#243b2e;display:grid;place-items:center;min-height:100vh;margin:0}.card{background:#fff;padding:32px;border-radius:12px;border:1px solid #d5e5d9;text-align:center;max-width:520px}</style></head><body><main class="card"><h1>Prazo encerrado</h1><p>O período para cadastro das igrejas terminou em 18/09/2026.</p></main></body></html>\`;
-  return \`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Cadastro de Igrejas | IPDA</title><style>
+  if (!publicChurchRegistrationOpen()) return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Cadastro encerrado</title><style>body{font-family:Arial;background:#f0f7f2;color:#243b2e;display:grid;place-items:center;min-height:100vh;margin:0}.card{background:#fff;padding:32px;border-radius:12px;border:1px solid #d5e5d9;text-align:center;max-width:520px}</style></head><body><main class="card"><h1>Prazo encerrado</h1><p>O período para cadastro das igrejas terminou em 18/09/2026.</p></main></body></html>`;
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Cadastro de Igrejas | IPDA</title><style>
   *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f0f7f2;color:#243b2e}.wrap{width:min(760px,calc(100% - 24px));margin:24px auto}.head{text-align:center;margin-bottom:18px}.head h1{color:#14532d;margin-bottom:6px}.card{background:#fff;border:1px solid #d5e5d9;border-radius:14px;box-shadow:0 8px 24px #14532d14;padding:24px}.deadline{background:#fff8df;border:1px solid #d7a92e;border-radius:8px;padding:12px;text-align:center;margin-bottom:20px;color:#6f5100}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.full{grid-column:1/-1}label{display:block;font-size:.86rem;font-weight:700;margin-bottom:7px}input,select{width:100%;height:46px;border:1px solid #c8dacd;border-radius:8px;padding:0 12px;font-size:1rem}button{width:100%;margin-top:22px;border:0;border-radius:8px;padding:13px;background:#14532d;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}.message{margin-top:15px;padding:12px;border-radius:8px;display:none}.message.ok{display:block;background:#eaf7f1;color:#086347}.message.error{display:block;background:#fff0f0;color:#a91f2c}.hp{position:absolute;left:-9999px}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.card{padding:18px}}</style></head><body><main class="wrap"><header class="head"><h1>Cadastro de Igrejas</h1><p>Igreja Pentecostal Deus é Amor</p></header><section class="card"><div class="deadline">Prazo final: 18/09/2026<br><strong id="countdown">Calculando...</strong></div><form id="form"><div class="hp"><label>Não preencher<input name="website" tabindex="-1" autocomplete="off"></label></div><div class="grid">
   <div class="full"><label>Nome da igreja ou filial*<input name="name" required></label></div>
   <div><label>Código TOTVS<input name="totvs_code"></label></div>
@@ -809,12 +807,12 @@ function publicChurchRegistrationPage() {
   <div class="full"><label>Endereço da igreja*<input name="address" required></label></div>
   <div><label>Bairro<input name="neighborhood"></label></div><div><label>CEP<input name="postal_code"></label></div>
   <div><label>Número<input name="address_number"></label></div><div><label>Ponto de referência<input name="reference_point"></label></div>
-  </div><button type="submit">Enviar cadastro para aprovação</button><div id="message" class="message" role="status"></div></form></section></main><script>
+  </div><button type="submit">Cadastrar igreja</button><div id="message" class="message" role="status"></div></form></section></main><script>
   const end=Date.parse('2026-09-19T00:00:00-04:00'),form=document.querySelector('#form'),message=document.querySelector('#message'),parent=document.querySelector('#parent'),classification=form.classification;
   function tick(){const r=Math.max(0,end-Date.now()),d=Math.floor(r/86400000),h=Math.floor(r%86400000/3600000),m=Math.floor(r%3600000/60000),s=Math.floor(r%60000/1000);document.querySelector('#countdown').textContent=d+' dias, '+h+'h, '+m+'min e '+s+'s restantes.'}tick();setInterval(tick,1000);
   async function loadChurches(){const response=await fetch('/financeiro/api/publico/igrejas');const churches=await response.json();parent.innerHTML='<option value="">Selecione</option>'+churches.map(c=>'<option value="'+c.id+'">'+c.name+' — '+c.classification+'</option>').join('');updateParent()}function updateParent(){const estadual=classification.value==='Estadual';parent.disabled=estadual;parent.required=!estadual;if(estadual)parent.value=''}classification.addEventListener('change',updateParent);loadChurches();
-  form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button');button.disabled=true;message.className='message';try{const data=Object.fromEntries(new FormData(form).entries());const response=await fetch('/financeiro/api/publico/solicitar-igreja',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw new Error(result.error||'Não foi possível enviar.');form.reset();updateParent();message.textContent='Cadastro enviado. Aguarde a aprovação do administrador.';message.className='message ok'}catch(error){message.textContent=error.message;message.className='message error'}finally{button.disabled=false}});
-</script></body></html>\`;
+  form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button');button.disabled=true;message.className='message';try{const data=Object.fromEntries(new FormData(form).entries());const response=await fetch('/financeiro/api/publico/solicitar-igreja',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw new Error(result.error||'Não foi possível enviar.');form.reset();updateParent();message.textContent='Igreja cadastrada com sucesso.';message.className='message ok'}catch(error){message.textContent=error.message;message.className='message error'}finally{button.disabled=false}});
+</script></body></html>`;
 }
 __name(publicChurchRegistrationPage, "publicChurchRegistrationPage");
 async function submitPublicChurchRequest(request, env) {
@@ -834,15 +832,18 @@ async function submitPublicChurchRequest(request, env) {
   const ip=request.headers.get("CF-Connecting-IP")||"";
   const recent=await env.DB.prepare("SELECT COUNT(*) AS total FROM public_church_requests WHERE requester_ip = ? AND created_at > datetime('now','-1 hour')").bind(ip).first();
   if (Number(recent?.total||0)>=5) return json({ error: "Limite de envios atingido. Tente novamente mais tarde." }, 429);
-  await env.DB.prepare(\`INSERT INTO public_church_requests
-    (id,name,totvs_code,classification,parent_church_id,address,neighborhood,city,state,postal_code,address_number,reference_point,requester_ip)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)\`).bind(crypto.randomUUID(),name,clean(data.totvs_code)||null,classification,classification==="Estadual"?null:parentId,address,clean(data.neighborhood),clean(data.city),clean(data.state),clean(data.postal_code),clean(data.address_number),clean(data.reference_point),ip).run();
+  const internalRequest=new Request("https://internal/financeiro/api/igrejas",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(data)});
+  const result=await saveChurch(internalRequest,env);
+  if(!result.ok)return result;
+  await env.DB.prepare(`INSERT INTO public_church_requests
+    (id,name,totvs_code,classification,parent_church_id,address,neighborhood,city,state,postal_code,address_number,reference_point,status,requester_ip,reviewed_at,reviewed_by)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,'cadastro público')`).bind(crypto.randomUUID(),name,clean(data.totvs_code)||null,classification,classification==="Estadual"?null:parentId,address,clean(data.neighborhood),clean(data.city),clean(data.state),clean(data.postal_code),clean(data.address_number),clean(data.reference_point),"approved",ip).run();
   return json({ ok:true },201);
 }
 __name(submitPublicChurchRequest, "submitPublicChurchRequest");
 async function listPublicChurchRequests(env) {
   await ensurePublicChurchRequestsTable(env);
-  return (await env.DB.prepare(\`SELECT r.*, p.name AS parent_name FROM public_church_requests r LEFT JOIN churches p ON p.id=r.parent_church_id WHERE r.status='pending' ORDER BY r.created_at DESC\`).all()).results||[];
+  return (await env.DB.prepare(`SELECT r.*, p.name AS parent_name FROM public_church_requests r LEFT JOIN churches p ON p.id=r.parent_church_id WHERE r.status='pending' ORDER BY r.created_at DESC`).all()).results||[];
 }
 __name(listPublicChurchRequests, "listPublicChurchRequests");
 async function reviewPublicChurchRequest(id, action, env, user) {
