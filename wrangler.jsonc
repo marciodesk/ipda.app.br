@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "ipda-financeiro",
+  "name": "ipda-controle-igreja",
   "main": "finance-worker.js",
   "compatibility_date": "2026-07-20",
   "d1_databases": [
