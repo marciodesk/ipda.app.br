@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ipda-financeiro",
-  "main": "finance-worker.js",
+  "main": "mobile-wrapper.js",
   "compatibility_date": "2026-07-20",
   "d1_databases": [
     {
